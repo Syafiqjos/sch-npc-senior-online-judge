@@ -87,11 +87,11 @@
         {% endif %}
 
         <div style="min-height: auto;" class="main-login ml-2 regularLoginform {% if not showregular %} d-none{% endif %}">
-            <h1 class="h3 mb-3 font-weight-normal">Tap to sign in</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
             <form action="{{ path('login') }}" method="post">
-                <div class="login-content">
+                <div style="min-height: auto;" class="login-content">
                     {% if error %}
-                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        <div style="margin-bottom: auto;" class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     {% endif %}
                 </div>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
