@@ -8,6 +8,8 @@
         async function tryLogin(){
             try {
                 const domjudgeLogin = "http://52.163.204.132:12345/login";
+                const domjudgeKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN5YWZpcWpvc0BnbWFpbC5jb20iLCJuYW1lIjoiQWhtYWQgU3lhZmlxIEFxaWwgV2FmaSIsInBob25lIjoiKzYyODU2MzA2NTgxNiIsInVzZXJfcm9sZSI6InVzZXIiLCJleHAiOjE2MzExMjg2NzN9.V03rqF0eEDhYavDjSuQk6_O8r4CH24u0Lx-AU0pX8BQ";
+                const domjudgePass = "aGFydXRtYXJ1dA==";
 
                 let formData = new FormData();
                 formData.append('loginmethod', 'xheaders');
@@ -15,8 +17,8 @@
                 const response = await fetch(domjudgeLogin,
                 {
                     headers: {
-                      "X-DOMjudge-Login": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN5YWZpcWpvc0BnbWFpbC5jb20iLCJuYW1lIjoiQWhtYWQgU3lhZmlxIEFxaWwgV2FmaSIsInBob25lIjoiKzYyODU2MzA2NTgxNiIsInVzZXJfcm9sZSI6InVzZXIiLCJleHAiOjE2MzExMDY2NDh9.qkd-Quof5iOuxoxMAErMsKFlVxr9V5Yhe5zMfMAmvqc",
-                      "X-DOMjudge-Pass": "aGFydXRtYXJ1dA=="
+                      "X-DOMjudge-Login": domjudgeKey,
+                      "X-DOMjudge-Pass": domjudgePass
                     },
                     method: "POST",
                     body: formData,
