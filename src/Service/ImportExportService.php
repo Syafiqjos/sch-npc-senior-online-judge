@@ -1021,7 +1021,10 @@ class ImportExportService
                     // Note that https://clics.ecs.baylor.edu/index.php/Contest_Control_System_Requirements#accounts.tsv
                     // assumes team accounts of the form "team-nnn" where
                     // nnn is a zero-padded team number.
-                    $teamId = preg_replace('/^[^0-9]*0*([0-9]+)$/', '\1', $line[2]);
+                    
+                    // $teamId = preg_replace('/^[^0-9]*0*([0-9]+)$/', '\1', $line[2]);
+                    $teamId = $line[1];
+                    
                     if (!preg_match('/^[0-9]+$/', $teamId)) {
                         $message = sprintf('cannot parse team id on line %d from "%s"', $l,
                                            $line[2]);
@@ -1047,9 +1050,10 @@ class ImportExportService
             // We may do more integrity/format checking of the data here.
             $accountData[] = [
                 'user' => [
-                    'name' => $line[1],
-                    'username' => $line[2],
-                    'plain_password' => $line[3],
+                    'name' => $line[2],
+                    'username' => $line[3],
+                    'email' => $line[4],
+                    'plain_password' => $line[5],
                     'team' => $team,
                     'user_roles' => $roles,
                 ],
