@@ -87,8 +87,9 @@
         {% endif %}
 
         <div class="main-login ml-2 regularLoginform {% if not showregular %} d-none{% endif %}">
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            <!-- HIDE <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1> -->
             <form action="{{ path('login') }}" method="post">
+                <!-- HIDE
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 <div class="login-content">
                     {% if error %}
@@ -107,6 +108,7 @@
                                placeholder="Password" required autocomplete="current-password">
                     </div>
                 </div>
+                -->
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                 {% if allow_registration %}
                     <div class="mt-3">
