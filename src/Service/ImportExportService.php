@@ -796,6 +796,11 @@ class ImportExportService
             if ($teamId === 'null' && is_numeric($teamIcpcId)) {
                 $teamId = (int)$teamIcpcId;
             }
+            
+            $teamMembers = "";
+            if (count(@$line) > 8){
+                $teamMembers = @$line[8];
+            }
 
             $teamData[] = [
                 'team' => [
@@ -803,7 +808,7 @@ class ImportExportService
                     'icpcid' => $teamIcpcId,
                     'categoryid' => @$line[2],
                     'name' => @$line[3],
-                    'members' => "kadal air\nBeruang kutub"
+                    'members' => $teamMembers
                 ],
                 'team_affiliation' => [
                     'shortname' => !empty(@$line[5]) ? @$line[5] : $affiliationExternalid,
