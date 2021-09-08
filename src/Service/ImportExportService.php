@@ -803,6 +803,7 @@ class ImportExportService
                     'icpcid' => $teamIcpcId,
                     'categoryid' => @$line[2],
                     'name' => @$line[3],
+                    'members' => "kadal air\nBeruang kutub"
                 ],
                 'team_affiliation' => [
                     'shortname' => !empty(@$line[5]) ? @$line[5] : $affiliationExternalid,
