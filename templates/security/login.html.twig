@@ -7,7 +7,7 @@
     <script defer type="text/javascript">
         async function tryLogin(){
             try {
-                const domjudgeLogin = "http://52.163.204.132:12345/login";
+                const domjudgeLogin = document.location.origin + "/login";
                 const domjudgeKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN5YWZpcWpvc0BnbWFpbC5jb20iLCJuYW1lIjoiQWhtYWQgU3lhZmlxIEFxaWwgV2FmaSIsInBob25lIjoiKzYyODU2MzA2NTgxNiIsInVzZXJfcm9sZSI6InVzZXIiLCJleHAiOjE2MzExMjg2NzN9.V03rqF0eEDhYavDjSuQk6_O8r4CH24u0Lx-AU0pX8BQ";
                 const domjudgePass = "aGFydXRtYXJ1dA==";
 
@@ -31,7 +31,7 @@
                 console.log('error :');
                 console.log(e);
                 
-                alert("Mohon Lakukan pembayaran dulu.");
+                alert('Akun anda belum terdaftar di portal Schematics NPC 2021.\nPastikan akun anda sudah terverifikasi dan mohon menunggu beberapa saat lagi untuk sinkronisasi data.\nTerima kasih.');
             }
         }
     </script>
