@@ -1,16 +1,16 @@
 function loginFailed(){
-	alert('Silahkan login melalui Schematics terlebih dahulu');
+	alert('Anda belum terdaftar di portal Schematics NPC 2021.\nSilahkan login Schematics apabila belum login.\nAnda akan di-redirect ke halaman login Schematics.\nTerima kasih.');
 	location.href = 'https://schematics.its.ac.id/dashboard/signin';
 }
 
-function loginError(){
-	alert('Akun anda belum terdaftar di portal Schematics NPC 2021.\nPastikan akun anda sudah terverifikasi dan mohon menunggu beberapa saat lagi untuk sinkronisasi data.\nTerima kasih.');
+function getSchematicsToken(){
+	return "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN5YWZpcWpvc0BnbWFpbC5jb20iLCJuYW1lIjoiQWhtYWQgU3lhZmlxIEFxaWwgV2FmaSIsInBob25lIjoiKzYyODU2MzA2NTgxNiIsInVzZXJfcm9sZSI6InVzZXIiLCJleHAiOjE2MzEyOTU4MDh9.5RvW2ObIfX5FvwOtxafX3iubB4MPXluy_jNSXiUhaPY";
 }
 
 function tryLogin(){
 	try {
 		const domjudgeLogin = document.location.origin + "/login";
-		const domjudgeKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN5YWZpcWpvc0BnbWFpbC5jb20iLCJuYW1lIjoiQWhtYWQgU3lhZmlxIEFxaWwgV2FmaSIsInBob25lIjoiKzYyODU2MzA2NTgxNiIsInVzZXJfcm9sZSI6InVzZXIiLCJleHAiOjE2MzExMjg2NzN9.V03rqF0eEDhYavDjSuQk6_O8r4CH24u0Lx-AU0pX8BQ";
+		const domjudgeKey = getSchematicsToken();
 		const domjudgePass = "aGFydXRtYXJ1dA==";
 
 		let formData = new FormData();
@@ -36,7 +36,7 @@ function tryLogin(){
 		}).catch((err) => {
 			console.log(err);
 
-			loginError();
+			loginFailed();
 		});
 
 		console.log('sapi');
@@ -44,6 +44,6 @@ function tryLogin(){
 		console.log('error :');
 		console.log(e);
 
-		loginError();
+		loginFailed();
 	}
 }
