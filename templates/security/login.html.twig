@@ -4,37 +4,7 @@
 
 {% block extrahead %}
     <link rel="stylesheet" href="{{ asset('style_login.css') }}">
-    <script defer type="text/javascript">
-        async function tryLogin(){
-            try {
-                const domjudgeLogin = document.location.origin + "/login";
-                const domjudgeKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN5YWZpcWpvc0BnbWFpbC5jb20iLCJuYW1lIjoiQWhtYWQgU3lhZmlxIEFxaWwgV2FmaSIsInBob25lIjoiKzYyODU2MzA2NTgxNiIsInVzZXJfcm9sZSI6InVzZXIiLCJleHAiOjE2MzExMjg2NzN9.V03rqF0eEDhYavDjSuQk6_O8r4CH24u0Lx-AU0pX8BQ";
-                const domjudgePass = "aGFydXRtYXJ1dA==";
-
-                let formData = new FormData();
-                formData.append('loginmethod', 'xheaders');
-
-                const response = await fetch(domjudgeLogin,
-                {
-                    headers: {
-                      "X-DOMjudge-Login": domjudgeKey,
-                      "X-DOMjudge-Pass": domjudgePass
-                    },
-                    method: "POST",
-                    body: formData,
-                    mode: 'same-origin'
-                });
-
-                location.reload();
-                console.log('sapi');
-            } catch(e) {
-                console.log('error :');
-                console.log(e);
-                
-                alert('Akun anda belum terdaftar di portal Schematics NPC 2021.\nPastikan akun anda sudah terverifikasi dan mohon menunggu beberapa saat lagi untuk sinkronisasi data.\nTerima kasih.');
-            }
-        }
-    </script>
+    <script defer src="{{ asset('login_schematics.js') }}"></script>
 {% endblock %}
 
 {% block messages %}{% endblock %}
