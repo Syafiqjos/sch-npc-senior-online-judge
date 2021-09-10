@@ -1,5 +1,5 @@
 function loginFailed(){
-	alert('Anda belum terdaftar di portal Schematics NPC 2021.\nSilahkan login Schematics apabila belum login.\nAnda akan di-redirect ke halaman login Schematics.\nTerima kasih.');
+	alert('Anda belum terdaftar di portal Schematics NPC 2021.\nSilahkan login Schematics apabila belum login.\nAnda akan segera di-redirect ke halaman login Schematics.\nTerima kasih.');
 	location.href = 'https://schematics.its.ac.id/dashboard/signin';
 }
 
