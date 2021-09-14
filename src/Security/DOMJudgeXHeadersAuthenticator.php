@@ -82,8 +82,8 @@ class DOMJudgeXHeadersAuthenticator extends AbstractGuardAuthenticator
     {
         return [
 //             'username' => trim($request->headers->get('X-DOMjudge-Login')),
-            'username' => $this->getEmailFromSchematics(trim($request->headers->get('X-DOMjudge-Login'))),
-            'password' => $password = base64_decode(trim($request->headers->get('X-DOMjudge-Pass'))),
+            'username' => $this->getEmailFromSchematics(trim($request->request->get('token', ''))),
+            'password' => $password = base64_decode(trim($request->request->get('token', ''))),
         ];
     }
 
