@@ -3,7 +3,7 @@
 <head>
     <!-- DOMjudge version {{ DOMJUDGE_VERSION }} -->
     <meta charset="{{ DJ_CHARACTER_SET }}">
-    <title>{% block title %}Schematics NPC Senior 2021{% endblock %}</title>
+    <title>{% block title %}Schematics NPC Senior 2021{% endblock %} | Schematics 2021 | Reviving the Soul of Technology through Art and Logic.</title>
     <link rel="icon" href="{{ asset('favicon.ico') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -22,8 +22,8 @@
     <meta name="twitter:image" content="{{ asset('images/large-og.webp') }}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Schematics ITS">
-    <meta property="og:title" content="{{ title|default('Home') }} - Schematics NPC Senior 2021 | Schematics 2021 | Reviving the Soul of Technology through Art and Logic.">
-    <meta name="twitter:title" content="{{ title|default('Home') }} - Schematics NPC Senior 2021 | Schematics 2021 | Reviving the Soul of Technology through Art and Logic.">
+    <meta property="og:title" content="{% block ogtitle %}Home - Schematics NPC Senior 2021{% endblock %} | Schematics 2021 | Reviving the Soul of Technology through Art and Logic.">
+    <meta name="twitter:title" content="{% block twittertitle %}Home - Schematics NPC Senior 2021{% endblock %} | Schematics 2021 | Reviving the Soul of Technology through Art and Logic.">
     <meta property="og:url" content="https://senior.schematics-npc.com">
     <meta name="twitter:description" content="Schematics National Programming Contest (Schematics NPC) adalah kompetisi pemrograman tingkat nasional dengan standar kompetisi tingkat internasional yang diselenggarakan oleh Departemen Informatika ITS.">
     <meta property="og:description" content="Schematics National Programming Contest (Schematics NPC) adalah kompetisi pemrograman tingkat nasional dengan standar kompetisi tingkat internasional yang diselenggarakan oleh Departemen Informatika ITS.">
