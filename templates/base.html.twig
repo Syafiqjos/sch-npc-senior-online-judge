@@ -3,7 +3,7 @@
 <head>
     <!-- DOMjudge version {{ DOMJUDGE_VERSION }} -->
     <meta charset="{{ DJ_CHARACTER_SET }}">
-    <title>{% block title %}Schematics NPC 2021{% endblock %}</title>
+    <title>{% block title %}Schematics NPC Senior 2021{% endblock %}</title>
     <link rel="icon" href="{{ asset('favicon.ico') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -18,6 +18,17 @@
 
         {{ extrahead|default('') }}
     {% endblock %}
+    <meta property="og:image" content="{{ asset('images/large-og.webp') }}">
+    <meta name="twitter:image" content="{{ asset('images/large-og.webp') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Schematics ITS">
+    <meta property="og:title" content="Schematics NPC Senior 2021">
+    <meta name="twitter:title" content="Schematics NPC Senior 2021">
+    <meta property="og:url" content="https://senior.schematics-npc.com">
+    <meta name="twitter:description" content="Schematics National Programming Contest (Schematics NPC) adalah kompetisi pemrograman tingkat nasional dengan standar kompetisi tingkat internasional yang diselenggarakan oleh Departemen Informatika ITS.">
+    <meta property="og:description" content="Schematics National Programming Contest (Schematics NPC) adalah kompetisi pemrograman tingkat nasional dengan standar kompetisi tingkat internasional yang diselenggarakan oleh Departemen Informatika ITS.">
+    <meta name="twitter:site" content="@schematics_its">
+    <meta name="twitter:card" content="summary_large_image">
 </head>
 <body style="padding-top: 4.5rem;">
 {% block menu %}{% endblock %}
