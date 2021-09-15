@@ -11,6 +11,8 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -96,46 +98,44 @@ class DOMJudgeXHeadersAuthenticator extends AbstractGuardAuthenticator
     }
     
     private function getEmailFromSchematics($jwt) {
-        try {
-            // API URL
-            $url = 'https://schematics.its.ac.id/api/user/get-user-info';
+        // API URL
+        $url = 'https://schematics.its.ac.id/api/user/get-user-info';
 
-            // Create a new cURL resource
-            $ch = curl_init($url);
+        // Create a new cURL resource
+        $ch = curl_init($url);
 
-            // Setup request to send json via POST
-            $payload = json_encode(array());
+        // Setup request to send json via POST
+        $payload = json_encode(array());
 
-            // Attach encoded JSON string to the POST fields
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        // Attach encoded JSON string to the POST fields
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
 
-            // Set the content type to application/json
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization: Bearer '.$jwt));
+        // Set the content type to application/json
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization: Bearer '.$jwt));
 
-            // Return response instead of outputting
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // Return response instead of outputting
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 
-            // Execute the POST request
-            $result = curl_exec($ch);
+        // Execute the POST request
+        $result = curl_exec($ch);
 
-            // Close cURL resource
-            curl_close($ch);
+        // Close cURL resource
+        curl_close($ch);
 
-            $data = json_decode($result, true);
-            
-            if ($data['success'] == false) {
-                return null;
-            }
-            
-            return $data['data']['email'];
-        } catch(Exception $e) {
-            var_dump($e->getMessage());
-            return null;
+        $data = json_decode($result, true);
+        
+        if (!$data) {
+            throw new CustomUserMessageAuthenticationException('internal-error');
         }
-        return null;
+        
+        if ($data['success'] == false) {
+            throw new CustomUserMessageAuthenticationException('schematics-unauthenticated');
+        }
+        
+        return $data['data']['email'];
     }
 
     public function checkCredentials($credentials, UserInterface $user)
@@ -164,7 +164,21 @@ class DOMJudgeXHeadersAuthenticator extends AbstractGuardAuthenticator
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        return null;
+        if ($exception instanceof UsernameNotFoundException) {
+            $exception = new CustomUserMessageAuthenticationException('Anda belum terdaftar pada portal ini. Silahkan tunggu beberapa saat lagi.');
+        } else if($exception->getMessage() == 'schematics-unauthenticated') {
+            return new RedirectResponse('https://schematics.its.ac.id/dashboard/signin?redirect=sch-npc/portal/senior/');
+        } else if($exception->getMessage() == 'internal-error') {
+            $exception = new CustomUserMessageAuthenticationException('Internal error.');
+        }
+        
+        if ($request->hasSession()) {
+            $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
+        }
+
+        $url = $this->getLoginUrl();
+
+        return new RedirectResponse($url);
     }
 
     /**
