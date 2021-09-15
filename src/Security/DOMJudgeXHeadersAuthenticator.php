@@ -134,8 +134,16 @@ class DOMJudgeXHeadersAuthenticator extends AbstractGuardAuthenticator
         if ($data['success'] == false) {
             throw new CustomUserMessageAuthenticationException('schematics-unauthenticated');
         }
-        
-        return $data['data']['email'];
+
+        foreach($data['data']['team'] as $team) {
+            if($team['event'] == 'npc_junior') {
+                throw new CustomUserMessageAuthenticationException('npc-junior');
+            }
+            if($team['event'] == 'npc_senior') {
+                return $data['data']['email'];
+            }
+        }
+        throw new CustomUserMessageAuthenticationException('not-npc-participant');      
     }
 
     public function checkCredentials($credentials, UserInterface $user)
@@ -170,6 +178,10 @@ class DOMJudgeXHeadersAuthenticator extends AbstractGuardAuthenticator
             return new RedirectResponse('https://schematics.its.ac.id/dashboard/signin?redirect=sch-npc/portal/senior/');
         } else if($exception->getMessage() == 'internal-error') {
             $exception = new CustomUserMessageAuthenticationException('Internal error.');
+        } else if($exception->getMessage() == 'npc-junior') {
+            $exception = new CustomUserMessageAuthenticationException('Portal junior dapat diakses melalui https://junior.schematics-npc.com/');
+        } else if($exception->getMessage() == 'not-npc-participant') {
+            $exception = new CustomUserMessageAuthenticationException('Anda bukan pendaftar Schematics NPC 2021');
         }
         
         if ($request->hasSession()) {
