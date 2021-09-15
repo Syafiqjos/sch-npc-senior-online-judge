@@ -176,7 +176,7 @@ class DOMJudgeXHeadersAuthenticator extends AbstractGuardAuthenticator
             $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
         }
 
-        $url = $this->getLoginUrl();
+        $url = 'https://senior.schematics-npc.com/login';
 
         return new RedirectResponse($url);
     }
