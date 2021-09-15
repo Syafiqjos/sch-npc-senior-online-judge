@@ -279,6 +279,7 @@ td.scorenc { border-color: silver; border-right: 0; }
 .countryflag {
     height: 30px;
     width: 40px;
+    padding: 2px;
 }
 
 .select2 img.countryflag {
